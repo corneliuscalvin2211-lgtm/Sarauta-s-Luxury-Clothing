@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarauta's Clothing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: white;
+        }
+
+        header {
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #c9a227;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #ddd;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero span {
+            color: #d4af37;
+        }
+
+        .hero p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            background: #d4af37;
+            color: black;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #f0cf5c;
+        }
+
+        .customizer {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .customizer h2 {
+            color: #d4af37;
+            margin-bottom: 30px;
+        }
+
+        .shirt {
+            width: 250px;
+            height: 300px;
+            margin: 20px auto;
+            background: white;
+            position: relative;
+            clip-path: polygon(
+                20% 5%, 35% 0%, 65% 0%, 80% 5%,
+                100% 25%, 85% 40%, 75% 30%,
+                75% 100%, 25% 100%, 25% 30%,
+                15% 40%, 0% 25%
+            );
+        }
+
+        .design {
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black;
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .controls {
+            display: grid;
+            gap: 15px;
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        select,
+        input {
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #333;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Sarauta's Clothing</h1>
+    <p>Luxury in Fashion</p>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#customize">Customize</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h2>Wear Your <span>Style</span></h2>
+    <p>Design your own clothing with Sarauta's Clothing.</p>
+    <button class="button" onclick="goToCustomizer()">
+        Start Designing
+    </button>
+</section>
+
+<section class="customizer" id="customize">
+
+    <h2>Customize Your T-Shirt</h2>
+
+    <div class="shirt" id="shirt">
+        <div class="design" id="designPreview">
+            Your Design
+        </div>
+    </div>
+
+    <div class="controls">
+
+        <select id="shirtColor" onchange="changeColor()">
+            <option value="white">White T-Shirt</option>
+            <option value="black">Black T-Shirt</option>
+            <option value="red">Red T-Shirt</option>
+            <option value="blue">Blue T-Shirt</option>
+        </select>
+
+        <select id="shirtSize">
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+            <option>XL</option>
+            <option>XXL</option>
+        </select>
+
+        <input
+            type="text"
+            id="customText"
+            placeholder="Enter your design text"
+            oninput="changeText()"
+        >
+
+        <input
+            type="number"
+            id="quantity"
+            value="1"
+            min="1"
+        >
+
+        <button class="button" onclick="addToCart()">
+            Add to Cart
+        </button>
+
+    </div>
+
+    <p id="message"></p>
+
+</section>
+
+<footer id="contact">
+    <p>© 2026 Sarauta's Clothing</p>
+    <p>Luxury in Fashion</p>
+</footer>
+
+<script>
+    function changeColor() {
+        const color = document.getElementById("shirtColor").value;
+        document.getElementById("shirt").style.background = color;
+    }
+
+    function changeText() {
+        const text = document.getElementById("customText").value;
+
+        document.getElementById("designPreview").textContent =
+            text || "Your Design";
+    }
+
+    function goToCustomizer() {
+        document.getElementById("customize").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    function addToCart() {
+        const size = document.getElementById("shirtSize").value;
+        const color = document.getElementById("shirtColor").value;
+        const quantity = document.getElementById("quantity").value;
+
+        document.getElementById("message").textContent =
+            "Added " + quantity + " " + color +
+            " T-Shirt(s), size " + size + " to your cart!";
+    }
+</script>
+
+</body>
+</html>
